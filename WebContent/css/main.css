@@ -1,0 +1,62 @@
+@charset "ISO-8859-1";
+
+.top {
+	top: 0;
+	background-color:hsl(0, 0%, 0%);
+	height: 5%;
+	width: 100%;
+	border-style: ridge;
+	position:fixed;
+	z-index: 1;
+}
+.down {
+	top: 5%;
+	buttom: 0;
+	height:95%;
+	width:100%;
+	position: fixed;
+	z-index: 1;
+	
+}
+.left {
+	left: 50px;
+	weight: 80%;
+	position: fixed;
+	z-index: 1;
+	color: white;
+	font-style: bold;
+	font-size: 20px;
+}
+.right {
+	right: 50px;
+	weight: 20%;
+	position: fixed;
+	z-index: 1;
+	color: white;
+	border-left-style: ridge;
+	color: white;
+	font-style: bold;
+	font-size: 15px;
+	background-color: hsl(0, 0%, 0%);
+	
+}
+	
+.rest {
+	margin-top:10%;
+	margin-left: 40%;
+	margin-right: auto;
+	
+}
+
+.button {
+	height: 50px;
+	width: 200%;
+	background-color: rgb(190, 0, 0);
+	border-style: groove;
+	font-size: 20px;
+	color: white;
+}
+.button:hover {
+	background-color: #ffa500;
+	color: black;
+}
