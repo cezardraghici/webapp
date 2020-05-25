@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import accountSelection.SearchIntoDB;
 import client.Client;
+import client.ClientData;
 import user.UserLog;
 
 
@@ -40,19 +41,25 @@ public class ClientInfo extends HttpServlet {
 		Client customer = new Client();
 		SearchIntoDB d = new SearchIntoDB();
 		DB db = new DB();
+		ArrayList<ClientData> clientD = new ArrayList<ClientData>();
 		customer = d.SetClient(CIC);
+		clientD = d.SearchClientData(CIC);
+		
 		
 		if (submit.equals("Add Diary")) {
 			request.setAttribute("user", user);
 			request.setAttribute("customer", customer);
-			request.getRequestDispatcher("WEB-INF/addDiary.jsp").forward(request, response);
+			request.setAttribute("clientD", clientD);
+			request.getRequestDispatcher("WEB-INF/addDiary1.jsp").forward(request, response);
 		}
 		else if (submit.equals("Client Diary")) {
 			ArrayList<DiaryInfo> di = new ArrayList<DiaryInfo>();
 			di = db.setDiary(CIC);
 			request.setAttribute("di", di);
 			request.setAttribute("user", user);
-			request.getRequestDispatcher("WEB-INF/clientDiary.jsp").forward(request, response);
+			request.setAttribute("customer", customer);
+			request.setAttribute("clientD", clientD);
+			request.getRequestDispatcher("WEB-INF/clientDiary1.jsp").forward(request, response);
 		}
 		
 	}

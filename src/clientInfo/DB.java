@@ -9,14 +9,14 @@ import com.mysql.jdbc.PreparedStatement;
 import connectionDB.ConnectionDB;
 
 public class DB {
-	Connection conn = (Connection) ConnectionDB.getCon1();
+	Connection conn = (Connection) ConnectionDB.getCon();
 	
 	public void InsertIntoDB(String user, String id_client, String action, String diary) {
 		
 		try {
 			PreparedStatement ps;
-			ps = (PreparedStatement) conn.prepareStatement("insert into customerdb.tip_actiune(`user`,`id_client`,`tip_actiune`,`descriere_actiune`,"
-					+ "`data_actiune`,`ora_actiune`) values(?,?,?,?,CURRENT_DATE(),CURRENT_TIME());");
+			ps = (PreparedStatement) conn.prepareStatement("insert into actions (`user`,`id_client`,`action_type`,`action_description`,"
+					+ "`action_date`,`action_time`) values(?,?,?,?,CURRENT_DATE(),CURRENT_TIME());");
 			ps.setString(1, user);
 			ps.setString(2, id_client);
 			ps.setString(3, action);
@@ -33,18 +33,17 @@ public class DB {
 		ArrayList<DiaryInfo> di = new ArrayList<DiaryInfo>();
 		try {
 			int i = 1;
-			PreparedStatement ps = (PreparedStatement) conn.clientPrepareStatement("select * from customerdb.tip_actiune where id_client=?;");
+			PreparedStatement ps = (PreparedStatement) conn.clientPrepareStatement("select user, action_type,action_description, action_date, action_time from actions where id_client=? order by action_date, action_time desc;");
 			ps.setString(1, CIC);
 			ResultSet rs = ps.executeQuery();
 		
 			while (rs.next()) {
 				d = new DiaryInfo();
 				d.setUser(rs.getString("user"));
-				d.setCIC(rs.getString("id_client"));
-				d.setAction(rs.getString("tip_actiune"));
-				d.setActiondes(rs.getString("descriere_actiune"));
-				d.setDate(rs.getString("data_actiune"));
-				d.setTime(rs.getString("ora_actiune"));
+				d.setAction(rs.getString("action_type"));
+				d.setActiondes(rs.getString("action_description"));
+				d.setDate(rs.getString("action_date"));
+				d.setTime(rs.getString("action_time"));
 				d.setNo(i);
 				di.add(d);
 				i++;

@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="client.Client"%>
+<%@page import="java.util.*"%>
+<%@page import="user.UserLog"%>
+<%@page import="credit.Credit"%>
 <%
-	Client customer = (Client) request.getAttribute("customer");
+	Client clientD = (Client) request.getAttribute("clientD");
+	UserLog user = (UserLog) request.getAttribute("user");
+	ArrayList<Credit> scd = (ArrayList<Credit>) request.getAttribute("scd");
 %>
 <!DOCTYPE html>
 <html>
@@ -12,31 +17,37 @@
 </head>
 <body>
 	<form method="post" action="AddCredit">
+		<input type="hidden" name="user"
+			value="<%out.print(user.getUser());%>">
 		<div>
 			<div class="top">
 				<table>
 					<tr>
+						<td>Nume :</td>
 						<td style="width: 300px; text-align: center;">
 							<%
-								out.print(customer.getNume() + " " + customer.getPrenume());
+								out.print(clientD.getFirstname() + " " + clientD.getLastname());
 							%>
 						</td>
 					</tr>
 					<tr>
+
 						<td>CIC :</td>
-						<td><input type="hidden" name="CIC"
-							value="<%out.print(customer.getId_client());%>">
-							<%
-								out.print(customer.getId_client());
-							%></td>
+						<td style="width: 300px; text-align: center;"><input
+							type="hidden" name="CIC"
+							value="<%out.print(clientD.getId_client());%>"> <%
+ 	out.print(clientD.getId_client());
+ %></td>
 					</tr>
 					<tr>
 						<td>CNP :</td>
-						<td>
+						<td style="width: 300px; text-align: center;">
 							<%
-								out.print(customer.getCNP());
+								out.print(clientD.getCNP());
 							%>
 						</td>
+					</tr>
+					<tr style="height: 20px;">
 					</tr>
 
 				</table>
@@ -44,29 +55,29 @@
 			<div class="down" style="border-top: 1px solid balck">
 				<table>
 					<tr>
-						<td>
-							
-								Suma : 
-						
+						<td>Suma :</td>
+						<td>2000 lei <input type="text" name="suma">
+							125.000 lei
+						</td>
+						<td style="width: 300px; text-align: right">Procent Dobanda :
+						</td>
+						<td><input type="hidden" name="dobanda" value="9.5">
+							9.5%</td>
+					</tr>
+					<tr>
+						<td>Perioada :</td>
+						<td>1 luna <input type="text" name="perioada"> 60
+							luni
 						</td>
 						<td>
-						20.000 <input type="text" name="suma"> 125.000
-						</td>
-						<td style="width:300px;text-align:right">Procent Dobanda :
-						</td>
-						<td>
-							<input type="hidden" name="dobanda" value="9.5"> 9.5%
+							<%
+								
+							%>
 						</td>
 					</tr>
 					<tr>
-						<td>Perioada : <select>
-								<option value="1">1 an</option>
-								<option value="2">2 ani</option>
-								<option value="3">3 ani</option>
-								<option value="4">4 ani</option>
-								<option value="5">5 ani</option>
-						</select>
-						</td>
+						<td>Data Scadentei :</td>
+						<td><input type="date" name="scadenta"></td>
 						<td>
 							<%
 								
@@ -81,16 +92,7 @@
 					</tr>
 				</table>
 			</div>
-			<div>
-			<table>
-			<tr>
-			<td>
 			
-			</td>
-			</tr>
-			</table>
-			
-			</div>
 		</div>
 	</form>
 </body>

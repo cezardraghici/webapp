@@ -56,7 +56,6 @@ public class AccountCheck extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/clientInfo.jsp").forward(request, response);
 			}
 			else if (c.CheckCNP(CNP) == 1) {
-				
 				customer = d.SetClient(g);
 				clientD = d.SearchClientData(g);
 				request.setAttribute("customer", customer);

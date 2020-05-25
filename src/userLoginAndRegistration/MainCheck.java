@@ -32,7 +32,7 @@ public class MainCheck extends HttpServlet {
 		user.setUser(userName);
 		String submitType = request.getParameter("submit");
 		if (submitType.equals("Log out")) {
-			request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 		else if (submitType.equals("Account Selection")) {
 			request.setAttribute("user", user);
@@ -43,9 +43,10 @@ public class MainCheck extends HttpServlet {
 			SearchIntoDB d = new SearchIntoDB();
 			ArrayList<Client> customer = new ArrayList<Client>();
 			customer = d.AllClients();
-			request.setAttribute("customer", customer);
+			request.setAttribute("customers", customer);
 			request.getRequestDispatcher("WEB-INF/clientView.jsp").forward(request, response);
 		}
+		
 	}
 
 }

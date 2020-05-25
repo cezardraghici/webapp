@@ -4,7 +4,7 @@
     <%@page import="user.UserLog"%>
 
 <%
-	Client customer = (Client) request.getAttribute("customer");
+	Client clientD = (Client) request.getAttribute("clientD");
 	UserLog user = (UserLog) request.getAttribute("user");
 %>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 </head>
 <body>
 <form action="AddDiary" method="post">
-<input type="hidden" name="CIC" value="<%out.print(customer.getId_client());%>">
+<input type="hidden" name="CIC" value="<%out.print(clientD.getId_client());%>">
 <input type="hidden" name="user" value="<%out.print(user.getUser());%>">
 <select name="actionType">
 <option value="CBD">CBD-Contacted debtor</option>

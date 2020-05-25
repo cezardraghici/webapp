@@ -2,31 +2,26 @@ package client;
 
 public class ClientData {
 	private String id_client;
-	private String limit;
+	private String loan_amount;
 	private String dlq;
 	private String dpd;
 	private String currency;
-	private String tip_credit;
-	private String credit_id;
-	private String date_opened;
+	private String loan_type;
+	private String id_loan;
+	private String grant_date;
 	private int no;
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
-	}
+	
 	public String getId_client() {
 		return id_client;
 	}
 	public void setId_client(String id_client) {
 		this.id_client = id_client;
 	}
-	public String getLimit() {
-		return limit;
+	public String getLoan_amount() {
+		return loan_amount;
 	}
-	public void setLimit(String limit) {
-		this.limit = limit;
+	public void setLoan_amount(String loan_amount) {
+		this.loan_amount = loan_amount;
 	}
 	public String getDlq() {
 		return dlq;
@@ -46,23 +41,29 @@ public class ClientData {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-	public String getTip_credit() {
-		return tip_credit;
+	public String getLoan_type() {
+		return loan_type;
 	}
-	public void setTip_credit(String tip_credit) {
-		this.tip_credit = tip_credit;
+	public void setLoan_type(String loan_type) {
+		this.loan_type = loan_type;
 	}
-	public String getCredit_id() {
-		return credit_id;
+	public String getId_loan() {
+		return id_loan;
 	}
-	public void setCredit_id(String credit_id) {
-		this.credit_id = credit_id;
+	public void setId_loan(String id_loan) {
+		this.id_loan = id_loan;
 	}
-	public String getDate_opened() {
-		return date_opened;
+	public String getGrant_date() {
+		return grant_date;
 	}
-	public void setDate_opened(String date_opened) {
-		this.date_opened = date_opened;
+	public void setGrant_date(String grant_date) {
+		this.grant_date = grant_date;
 	}
-
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	
 }

@@ -42,7 +42,7 @@
 							<td
 								style="height: 40px; width: 10x; background-color: white; color: black">
 								<%
-									out.print(customer.getNume() + " " + customer.getPrenume());
+									out.print(customer.getFirstname() + " " + customer.getLastname());
 								%>
 							</td>
 						</tr>
@@ -52,7 +52,7 @@
 								Localitate:</td>
 							<td>
 								<%
-									out.print(customer.getLocalitate());
+									out.print(customer.getCity());
 								%>
 							</td>
 							<td style="text-align: right; font-weight: bold; width: 500px">
@@ -67,7 +67,7 @@
 							<td style="text-align: right; font-weight: bold">Judet:</td>
 							<td>
 								<%
-									out.print(customer.getJudet());
+									out.print(customer.getRegion());
 								%>
 							</td>
 							<td style="text-align: right; font-weight: bold">
@@ -111,7 +111,7 @@
 							<td style="text-align: right; font-weight: bold">Phone :</td>
 							<td>
 								<%
-									out.print(customer.getTelefon());
+									out.print(customer.getPhone());
 								%>
 							</td>
 						</tr>
@@ -141,22 +141,22 @@
 							</td>
 							<td style="border: 1px solid black; border-collapse: collapse;">
 								<%
-									out.print(cd.getTip_credit());
+									out.print(cd.getLoan_type());
 								%>
 							</td>
 							<td style="border: 1px solid black; border-collapse: collapse;">
 								<%
-									out.print(cd.getCredit_id());
+									out.print(cd.getId_loan());
 								%>
 							</td>
 							<td style="border: 1px solid black; border-collapse: collapse;">
 								<%
-									out.print(cd.getDate_opened());
+									out.print(cd.getGrant_date());
 								%>
 							</td>
 							<td style="border: 1px solid black; border-collapse: collapse;">
 								<%
-									out.print(cd.getLimit());
+									out.print(cd.getLoan_amount());
 								%>
 							</td>
 							<td style="border: 1px solid black; border-collapse: collapse;">

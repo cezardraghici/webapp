@@ -65,3 +65,41 @@ table:hover {
 	z-index: 1;
 	
 }
+
+.topn {
+	height:10%;
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+     top:0;
+     width: 100%;
+     left: 0;
+}
+
+.splitn {
+  height: 90%;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.leftn {
+  left: 0;
+  width: 15%;
+}
+
+.rightn {
+  right: 0;
+  width: 85%;
+  overflow: scroll;
+}
+
+.tbl {
+	top: 5%;
+	position: relative;
+	z-index: 1;
+	right: 2%;
+	overflow-x: hidden;
+}

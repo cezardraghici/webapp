@@ -53,7 +53,7 @@ public class AddDiary extends HttpServlet {
 			request.setAttribute("clientD", clientD);
 			request.getRequestDispatcher("WEB-INF/clientInfo.jsp").forward(request, response);
 		}
-		if (submit.equals("Submit")) {
+		else if (submit.equals("Submit")) {
 			
 			db.InsertIntoDB(userName ,CIC, action, diary);
 			customer = d.SetClient(CIC);
@@ -62,6 +62,25 @@ public class AddDiary extends HttpServlet {
 			request.setAttribute("customer", customer);
 			request.setAttribute("clientD", clientD);
 			request.getRequestDispatcher("WEB-INF/clientInfo.jsp").forward(request, response);
+		}
+		else if (submit.equals("Add Diary")) {
+			customer = d.SetClient(CIC);
+			clientD = d.SearchClientData(CIC);
+			request.setAttribute("user", user);
+			request.setAttribute("customer", customer);
+			request.setAttribute("clientD", clientD);
+			request.getRequestDispatcher("WEB-INF/addDiary1.jsp").forward(request, response);
+		}
+		else if (submit.equals("Client Diary")) {
+			ArrayList<DiaryInfo> di = new ArrayList<DiaryInfo>();
+			di = db.setDiary(CIC);
+			customer = d.SetClient(CIC);
+			clientD = d.SearchClientData(CIC);
+			request.setAttribute("di", di);
+			request.setAttribute("user", user);
+			request.setAttribute("customer", customer);
+			request.setAttribute("clientD", clientD);
+			request.getRequestDispatcher("WEB-INF/clientDiary1.jsp").forward(request, response);
 		}
 			
 	}

@@ -20,7 +20,7 @@ public class UserCheck {
 
 		try {
 
-			a = (PreparedStatement) conn.prepareStatement("select user, password from login.userlogin where user=?;");
+			a = (PreparedStatement) conn.prepareStatement("select user, password from user_login where user=?;");
 			a.setString(1, user);
 			rs = a.executeQuery();
 
@@ -50,7 +50,7 @@ public class UserCheck {
 
 		try {
 
-			a = (PreparedStatement) conn.prepareStatement("select user from login.userlogin;");
+			a = (PreparedStatement) conn.prepareStatement("select user from mydb.user_login;");
 			rs = a.executeQuery();
 			while (rs.next()) {
 				u = rs.getString("user");

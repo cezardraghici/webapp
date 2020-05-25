@@ -32,6 +32,7 @@
 					<td><input type="submit" name="submit" value="Clients View"
 						class="button"></td>
 				</tr>
+				
 			</table>
 		</div>
 	</form>

@@ -6,10 +6,10 @@ import java.sql.DriverManager;
 public class ConnectionDB {
 
 	static Connection conn = null;
-	static String username = "cezar";
-	static String password = "Guesswho13";
-	static String url1 = "jdbc:mysql://localhost:3306/login?useSSL=false";
-	static String url2 = "jdbc:mysql://localhost:3306/customerdb?useSSL=false";
+	static String username = "root";
+	static String password = "Oaltazi13";
+	static String url1 = "jdbc:mysql://localhost:3306/mydb?useSSL=false";
+
 
 	public static Connection getCon() {
 		try {
@@ -20,15 +20,4 @@ public class ConnectionDB {
 		}
 		return conn;
 	}
-
-	public static Connection getCon1() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(url2, username, password);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return conn;
-	}
-
 }

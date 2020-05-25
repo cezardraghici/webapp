@@ -15,7 +15,7 @@ public class InsertInDB {
 		try {
 			Connection conn = ConnectionDB.getCon();
 			PreparedStatement ps = (PreparedStatement) conn
-					.prepareStatement("INSERT INTO login.userlogin values(?,?,?,?,?,?,?,?);");
+					.prepareStatement("insert into user_login (`user`, `password`,`firstName`, `lastName`, `email`,`adress`, `phone`, `role`) values (?,?,?,?,?,?,?,?);");
 			ps.setString(1, user);
 			ps.setString(2, password);
 			ps.setString(3, firstName);

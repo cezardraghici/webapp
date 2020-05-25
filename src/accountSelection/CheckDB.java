@@ -9,7 +9,7 @@ import com.mysql.jdbc.PreparedStatement;
 import connectionDB.ConnectionDB;
 
 public class CheckDB {
-	Connection conn = (Connection) ConnectionDB.getCon1();
+	Connection conn = (Connection) ConnectionDB.getCon();
 	
 	public int CheckCIC(String c) {
 		int i = 0;
@@ -18,7 +18,7 @@ public class CheckDB {
 		String u = null;
 		
 		try {
-			a = (PreparedStatement) conn.prepareStatement("select id_client from customerDB.clienti;");
+			a = (PreparedStatement) conn.prepareStatement("select id_client from clients;");
 			rs  =a.executeQuery();
 			while (rs.next()) {
 				u = rs.getString("id_client");
@@ -40,7 +40,7 @@ public class CheckDB {
 		String u = null;
 		
 		try {
-			a = (PreparedStatement) conn.prepareStatement("select CNP from customerDB.clienti;");
+			a = (PreparedStatement) conn.prepareStatement("select CNP from clients;");
 			rs  =a.executeQuery();
 			while (rs.next()) {
 				u = rs.getString("CNP");
@@ -60,7 +60,7 @@ public class CheckDB {
 		PreparedStatement a;
 		ResultSet rs;
 		try {
-			a = (PreparedStatement) conn.prepareStatement("select id_client from customerDB.clienti where CNP=?;");
+			a = (PreparedStatement) conn.prepareStatement("select id_client from clients where CNP=?;");
 			a.setString(1, c);
 			rs  =a.executeQuery();
 			if (rs.next()) {
@@ -79,7 +79,7 @@ public class CheckDB {
 		PreparedStatement a;
 		ResultSet rs;
 		try {
-			a = (PreparedStatement) conn.prepareStatement("select id_client from customerDB.clienti;");
+			a = (PreparedStatement) conn.prepareStatement("select id_client from clients;");
 			rs  =a.executeQuery();
 			while (rs.next()) {
 				list.add(rs.getString("id_client"));

@@ -10,7 +10,7 @@ import client.ClientData;
 import connectionDB.ConnectionDB;
 
 public class SearchIntoDB {
-	Connection conn = (Connection) ConnectionDB.getCon1();
+	Connection conn = (Connection) ConnectionDB.getCon();
 	
 	public Client SetClient(String CIC) {
 		ResultSet rs;
@@ -18,35 +18,35 @@ public class SearchIntoDB {
 		Client c = new Client();
 		try {
 			
-			ps = (PreparedStatement) conn.clientPrepareStatement("Select * from customerdb.clienti where id_client = ?");
+			ps = (PreparedStatement) conn.clientPrepareStatement("Select * from clients where id_client = ?");
 			ps.setString(1, CIC);
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				c.setId_client(rs.getString("id_client"));
-				c.setNume(rs.getString("nume"));
-				c.setPrenume(rs.getString("prenume"));
-				c.setLocalitate(rs.getString("localitate"));
-				c.setJudet(rs.getString("judet"));
+				c.setFirstname(rs.getString("firstname"));
+				c.setLastname(rs.getString("lastname"));
+				c.setCity(rs.getString("city"));
+				c.setRegion(rs.getString("region"));
 				c.setCNP(rs.getString("CNP"));
-				c.setTelefon(rs.getString("telefon"));
+				c.setPhone(rs.getString("phone"));
 			}
 			rs.close();
 			ps.close();
-			ps = (PreparedStatement) conn.clientPrepareStatement("Select Round(sum(rata_credit + rata_dobanda),2) as dlq from customerdb.rate where id_client=? and rata_platita='NO' and data_scadenta<sysdate();");
+			ps = (PreparedStatement) conn.clientPrepareStatement("Select Round(sum(loan_rate + interest_rate),2) as dlq from payment_rate where id_client=? and rate_paid='NO' and due_date<sysdate();");
 			ps.setString(1, CIC);
 			rs = ps.executeQuery();
 			if (rs.next()) 
 				c.setDlq(rs.getString("dlq"));
 			rs.close();
 			ps.close();
-			ps = (PreparedStatement) conn.clientPrepareStatement("Select datediff(sysdate(), min(data_scadenta)) as dpd from customerdb.rate where id_client = ? and rata_platita = 'NO';");
+			ps = (PreparedStatement) conn.clientPrepareStatement("Select datediff(sysdate(), min(due_date)) as dpd from payment_rate where id_client = ? and rate_paid = 'NO';");
 			ps.setString(1, CIC);
 			rs = ps.executeQuery();
 			if (rs.next()) 
 				c.setDpd(rs.getString("dpd"));
 			rs.close();
 			ps.close();
-			ps = (PreparedStatement) conn.clientPrepareStatement("Select round(sum(rata_credit + rata_dobanda),2) as exp from customerdb.rate where id_client = ? and rata_platita = 'NO' group by id_client;");
+			ps = (PreparedStatement) conn.clientPrepareStatement("Select round(sum(loan_rate + interest_rate),2) as exp from payment_rate where id_client = ? and rate_paid = 'NO' group by id_client;");
 			ps.setString(1, CIC);
 			rs = ps.executeQuery();
 			if(rs.next())
@@ -64,17 +64,17 @@ public class SearchIntoDB {
 		Client c;
 		ArrayList<Client> cls = new ArrayList<Client>();
 		try {
-			PreparedStatement ps = (PreparedStatement) conn.clientPrepareStatement("Select * from customerdb.clienti;");
+			PreparedStatement ps = (PreparedStatement) conn.clientPrepareStatement("Select * from clients;");
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				c = new Client();
 				c.setId_client(rs.getString("id_client"));
-				c.setNume(rs.getString("nume"));
-				c.setPrenume(rs.getString("prenume"));
+				c.setFirstname(rs.getString("firstname"));
+				c.setLastname(rs.getString("lastname"));
 				c.setCNP(rs.getString("CNP"));
-				c.setLocalitate(rs.getString("localitate"));
-				c.setJudet(rs.getString("judet"));
-				c.setTelefon(rs.getString("telefon"));
+				c.setCity(rs.getString("city"));
+				c.setRegion(rs.getString("region"));
+				c.setPhone(rs.getString("phone"));
 				cls.add(c);
 			}
 		} catch (Exception e) {
@@ -91,21 +91,21 @@ public class SearchIntoDB {
 		int i = 1;
 		
 		try {
-			PreparedStatement ps = (PreparedStatement) conn.clientPrepareStatement("select a.id_client,a.tip_credit, a.id_credit, a.data_acordare, a.valoare_credit, a.moneda, \r\n" + 
-					"Round(sum(b.rata_credit + b.rata_dobanda),2) as dlq, \r\n" + 
-					"datediff(sysdate(), min(b.data_scadenta)) as dpd from customerdb.credite as a left join customerdb.rate as b on a.id_credit = b.id_credit where a.id_client=? and b.rata_platita='NO' and b.data_scadenta<sysdate() group by a.id_credit;");
+			PreparedStatement ps = (PreparedStatement) conn.clientPrepareStatement("select a.id_client,a.loan_type, a.id_loan, a.grant_date, a.loan_amount, a.currency, \r\n" + 
+					"Round(sum(b.loan_rate + b.interest_rate),2) as dlq, \r\n" + 
+					"datediff(sysdate(), min(b.due_date)) as dpd from loans as a left join payment_rate as b on a.id_loan = b.id_loan where a.id_client=? and b.rate_paid='NO' and b.due_date<sysdate() group by a.id_loan;");
 			ps.setString(1, CIC);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				cd = new ClientData();
 				cd.setId_client(rs.getString("id_client"));
-				cd.setCredit_id(rs.getString("id_credit"));
-				cd.setDate_opened(rs.getString("data_acordare"));
-				cd.setLimit(rs.getString("valoare_credit"));
-				cd.setCurrency(rs.getString("moneda"));
+				cd.setId_loan(rs.getString("id_loan"));
+				cd.setGrant_date(rs.getString("grant_date"));
+				cd.setLoan_amount(rs.getString("loan_amount"));
+				cd.setCurrency(rs.getString("currency"));
 				cd.setDlq(rs.getString("dlq"));
 				cd.setDpd(rs.getString("dpd"));
-				cd.setTip_credit(rs.getString("tip_credit"));
+				cd.setLoan_type(rs.getString("loan_type"));
 				cd.setNo(i);
 				c.add(cd);
 				i++;
